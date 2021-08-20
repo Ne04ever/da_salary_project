@@ -79,3 +79,16 @@ from sklearn.metrics import mean_absolute_error
 mean_absolute_error(y_test,tpred_ln)
 mean_absolute_error(y_test,tpred_lm_1)
 mean_absolute_error(y_test,tpred_rf)
+
+
+#productinization
+import pickle
+pickl = {'model': gs.best_estimator_}
+pickle.dump( pickl, open( 'model_file' + ".p", "wb" ) )
+
+file_name = "model_file.p"
+with open(file_name, 'rb') as pickled:
+        data = pickle.load(pickled)
+        model = data['model']
+
+model.predict(X_test.iloc[0,:].values.reshape(1,-1))
